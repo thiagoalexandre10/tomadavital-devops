@@ -12,13 +12,14 @@ LOG="deploy-azure.log"
 echo "== 1/4 Criando o grupo de recursos $GRUPO" | tee -a $LOG
 az group create --name $GRUPO --location $LOCAL 2>&1 | tee -a $LOG
 
-echo "== 2/4 Criando a VM Ubuntu (Standard_B2s, 4 GB)" | tee -a $LOG
+echo "== 2/4 Criando a VM Ubuntu (Standard_B2ls_v2, 4 GB)" | tee -a $LOG
 az vm create \
   --resource-group $GRUPO \
   --name $VM \
   --location $LOCAL \
   --image Ubuntu2204 \
-  --size Standard_B2s \
+  --size Standard_B2ls_v2 \
+  --zone 2 \ \
   --admin-username azureuser \
   --generate-ssh-keys \
   --public-ip-sku Standard 2>&1 | tee -a $LOG
