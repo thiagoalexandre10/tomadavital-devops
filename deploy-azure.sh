@@ -19,7 +19,7 @@ az vm create \
   --location $LOCAL \
   --image Ubuntu2204 \
   --size Standard_B2ls_v2 \
-  --zone 2 \ \
+  --zone 2 \ 
   --admin-username azureuser \
   --generate-ssh-keys \
   --public-ip-sku Standard 2>&1 | tee -a $LOG
