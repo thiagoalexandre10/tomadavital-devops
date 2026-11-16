@@ -1,0 +1,51 @@
+# Tomada Vital - API Java + MySQL, cada um no seu container
+services:
+  db:
+    image: mysql:8.4
+    container_name: tomadavital-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      LANG: C.UTF-8   # o cliente mysql do docker exec mostra os acentos certos (sem isto sai "Jos? Carlos")
+    expose:
+      - "3306"
+    volumes:
+      - tomadavital-dados:/var/lib/mysql
+    networks:
+      - tomadavital-net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    image: tomadavital-api:1.0
+    container_name: tomadavital-api
+    restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      TZ: America/Sao_Paulo   # horario de Brasilia nas datas da API (sem isto o container usa UTC)
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - tomadavital-net
+
+volumes:
+  tomadavital-dados:
+    name: tomadavital-dados
+
+networks:
+  tomadavital-net:
+    name: tomadavital-net

@@ -1,0 +1,13 @@
+# o que NAO entra na imagem (deixa o build mais rapido e nao leva nada sensivel)
+target/
+data/
+.git/
+.idea/
+.vscode/
+*.iml
+*.log
+.env
+Dockerfile
+docker-compose.yml
+deploy-azure.sh
+destroy-azure.sh
