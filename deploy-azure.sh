@@ -3,9 +3,9 @@
 # Uso (no Azure Cloud Shell, modo Bash):  chmod +x deploy-azure.sh && ./deploy-azure.sh
 set -eo pipefail
 
-RM="RM000000"                       # troque pelo seu RM
+RM="RM567486"                       # troque pelo seu RM
 GRUPO="rg-tomadavital-$RM"
-LOCAL="eastus2"                     # se o Azure recusar a regiao, troque (ex.: brazilsouth, eastus)
+LOCAL="spaincentral"                   # se o Azure recusar a regiao, troque (ex.: brazilsouth, eastus)
 VM="vm-tomadavital"
 LOG="deploy-azure.log"
 
