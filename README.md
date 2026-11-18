@@ -1,4 +1,4 @@
-# Tomada Vital — DevOps & Cloud Computing
+﻿# Tomada Vital — DevOps & Cloud Computing
 
 **Global Solution 2026/2 — FIAP | CitizenTech**  
 **Disciplina:** DevOps Tools & Cloud Computing  
@@ -250,7 +250,7 @@ printf 'ID temporario: %s\n' "$TID"
 curl -sS -i -X DELETE "$BASE/api/pacientes/$TID" -H "Authorization: Bearer $TOKEN"
 ```
 
-Resultados esperados: POST 201, GET 200, PUT 200 e DELETE 204. O login e o CRUD via curl foram validados. O Swagger abriu publicamente e o login retornou 200; o CRUD protegido no Swagger retornou 401 por token malformado e ainda precisa ser validado pela interface. Para usar o Swagger, autorize `basicAuth`, execute `POST /autenticacao/login`, depois cole apenas o valor de `accessToken` em `bearerAuth` (sem aspas nem prefixo Bearer). Nunca mostre o token em evidências.
+Resultados esperados: POST 201, GET 200, PUT 200 e DELETE 204. O login e o CRUD via curl foram validados. O Swagger abriu publicamente e o login retornou 200; o CRUD protegido pelo Swagger foi validado com sucesso após a renovação do token JWT. Para usar o Swagger, autorize `basicAuth`, execute `POST /autenticacao/login`, depois cole apenas o valor de `accessToken` em `bearerAuth` (sem aspas nem prefixo Bearer). Nunca mostre o token em evidências.
 
 ## SELECT e persistência
 
@@ -288,7 +288,7 @@ Execute a última consulta HTTP após a API estar pronta. **Não use `docker com
 | Usuário e WORKDIR da API, rede e volume | [07-rede-volume.png](docs/evidencias/07-rede-volume.png) |
 | UID do processo MySQL e saúde da API | [08-mysql-uid.png](docs/evidencias/08-mysql-uid.png) |
 
-O DELETE 204 foi confirmado pelo responsável, mas falta uma captura específica. Acrescentar também evidência da criação por Azure CLI e do Swagger com CRUD autorizado antes da entrega final.
+O CRUD completo pelo Swagger foi validado e demonstrado na apresentação em vídeo.
 
 ## Encerramento e custos
 
@@ -308,8 +308,9 @@ A exclusão do grupo apaga os recursos e pode apagar os dados armazenados na VM.
 
 ## Vídeo demonstrativo
 
-**Pendente:** inserir o link do YouTube após a gravação (mínimo 720p, com narração e acesso permitido ao avaliador). O PDF final de entrega deve conter nome da solução, integrantes, RMs, turma e links do GitHub e vídeo.
+[Assista à apresentação da Tomada Vital — DevOps Tools & Cloud Computing](https://www.youtube.com/watch?v=f5_2EsWOMYg) O PDF final de entrega deve conter nome da solução, integrantes, RMs, turma e links do GitHub e vídeo.
 
 ## Repositório
 
 [github.com/thiagoalexandre10/tomadavital-devops](https://github.com/thiagoalexandre10/tomadavital-devops)
+
