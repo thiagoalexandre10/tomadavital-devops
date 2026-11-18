@@ -75,7 +75,7 @@ flowchart LR
 ├── .env.example            # Modelo sem credenciais reais
 ├── deploy-azure.sh         # Provisionamento Azure CLI
 ├── destroy-azure.sh        # Exclusão dos recursos
-├── COMO-RODAR-NA-VM.md      # Guia complementar (verificar valores atuais neste README)
+
 ├── docs/
 │   ├── arquitetura.png
 │   └── evidencias/
@@ -308,9 +308,10 @@ A exclusão do grupo apaga os recursos e pode apagar os dados armazenados na VM.
 
 ## Vídeo demonstrativo
 
-[Assista à apresentação da Tomada Vital — DevOps Tools & Cloud Computing](https://www.youtube.com/watch?v=f5_2EsWOMYg) O PDF final de entrega deve conter nome da solução, integrantes, RMs, turma e links do GitHub e vídeo.
+[Assista à apresentação da Tomada Vital — DevOps Tools & Cloud Computing](https://www.youtube.com/watch?v=f5_2EsWOMYg)
 
 ## Repositório
 
 [github.com/thiagoalexandre10/tomadavital-devops](https://github.com/thiagoalexandre10/tomadavital-devops)
+
 
