@@ -182,7 +182,7 @@ Substitua `IP_PUBLICO` pelo IP obtido do Azure para acessar externamente:
 | OpenAPI | `http://IP_PUBLICO:8080/v3/api-docs` |
 | Health | `http://IP_PUBLICO:8080/actuator/health` |
 
-IP utilizado na demonstração: `158.158.19.200` (pode mudar ao recriar a VM). HTTP sem TLS é somente para demonstração com dados fictícios. Não inserir dados de pacientes reais; restringir acesso e configurar HTTPS antes de qualquer uso real.
+IP utilizado na demonstração original (17/11/2026): `158.158.19.200`. Novo IP utilizado nas evidências complementares (18/11/2026): `68.221.27.30`. A infraestrutura original foi excluída após a gravação e recriada pelo mesmo script Azure CLI, comprovando a reprodutibilidade do ambiente. O IP poderá mudar novamente em futuras implantações. HTTP sem TLS é somente para demonstração com dados fictícios. Não inserir dados de pacientes reais; restringir acesso e configurar HTTPS antes de qualquer uso real.
 
 ## Dockerfile e Docker Compose
 
@@ -250,7 +250,7 @@ printf 'ID temporario: %s\n' "$TID"
 curl -sS -i -X DELETE "$BASE/api/pacientes/$TID" -H "Authorization: Bearer $TOKEN"
 ```
 
-Resultados esperados: POST 201, GET 200, PUT 200 e DELETE 204. O login e o CRUD via curl foram validados. O Swagger abriu publicamente e o login retornou 200; o CRUD protegido pelo Swagger foi validado com sucesso após a renovação do token JWT. Para usar o Swagger, autorize `basicAuth`, execute `POST /autenticacao/login`, depois cole apenas o valor de `accessToken` em `bearerAuth` (sem aspas nem prefixo Bearer). Nunca mostre o token em evidências.
+Resultados esperados: POST 201, GET 200, PUT 200 e DELETE 204. O login e o CRUD via curl foram validados. O Swagger abriu publicamente e o login retornou 200; o CRUD protegido pelo Swagger foi validado com sucesso após a renovação do token JWT. Para usar o Swagger, obtenha o JWT por HTTP Basic no endpoint `POST /autenticacao/login`, desautorize `basicAuth` e cole apenas o valor de `accessToken` em `bearerAuth` (sem aspas nem prefixo Bearer). Nunca mostre o token em evidências.
 
 ## SELECT e persistência
 
@@ -286,9 +286,13 @@ Execute a última consulta HTTP após a API estar pronta. **Não use `docker com
 | SELECT em duas tabelas | [05-select.png](docs/evidencias/05-select.png) |
 | Persistência após recriação | [06-persistencia.png](docs/evidencias/06-persistencia.png) |
 | Usuário e WORKDIR da API, rede e volume | [07-rede-volume.png](docs/evidencias/07-rede-volume.png) |
-| UID do processo MySQL e saúde da API | [08-mysql-uid.png](docs/evidencias/08-mysql-uid.png) |
+| UID 999 do processo MySQL | [08-mysql-uid.png](docs/evidencias/08-mysql-uid.png) |
+| Logs da API | [09-logs-api.png](docs/evidencias/09-logs-api.png) |
+| Logs do banco | [10-logs-db.png](docs/evidencias/10-logs-db.png) |
+| DELETE de registro temporário (204) | [11-delete.png](docs/evidencias/11-delete.png) |
+| Recriação da infraestrutura por Azure CLI | [12-azure-cli.png](docs/evidencias/12-azure-cli.png) |
 
-O CRUD completo pelo Swagger foi validado e demonstrado na apresentação em vídeo.
+O CRUD completo pelo Swagger foi validado e demonstrado na apresentação em vídeo. Em 18/11/2026, a infraestrutura foi recriada por Azure CLI e foram obtidas evidências complementares dos logs, UID do MySQL, Health público e DELETE HTTP 204. As capturas anteriores de SELECT e persistência correspondem à implantação original.
 
 ## Encerramento e custos
 
@@ -313,5 +317,6 @@ A exclusão do grupo apaga os recursos e pode apagar os dados armazenados na VM.
 ## Repositório
 
 [github.com/thiagoalexandre10/tomadavital-devops](https://github.com/thiagoalexandre10/tomadavital-devops)
+
 
 
